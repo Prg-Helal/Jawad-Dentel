@@ -25,10 +25,12 @@ document.addEventListener('DOMContentLoaded', function() {
 function initMobileMenu() {
     const menuToggle = document.querySelector('.mobile-menu-toggle');
     const navList = document.querySelector('.nav-list');
+    const navListLogo = document.getElementById('navListLogo');
     
     menuToggle.addEventListener('click', function() {
         this.classList.toggle('active');
         navList.classList.toggle('active');
+        navListLogo.classList.toggle('active');
         
         // Toggle aria-expanded attribute for accessibility
         const isExpanded = this.getAttribute('aria-expanded') === 'true';

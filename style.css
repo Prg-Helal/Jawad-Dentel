@@ -64,9 +64,10 @@ button {
     font-family: inherit;
 }
 
-section{
+section {
     padding: 1.5rem;
 }
+
 /* Enhancing Focus States for Accessibility */
 a,
 button,
@@ -281,6 +282,14 @@ p {
     padding: 0.5rem 0;
     color: var(--brand-1);
     /* Nav links are brand color */
+}
+
+#navListLogo {
+    display: none;
+}
+
+#navListLogo.active {
+    display: flex !important;
 }
 
 .nav-list a::after {
@@ -583,7 +592,7 @@ p {
 }
 
 .feature-card:hover .feature-icon {
-    background: var(--brand-3);
+    background: #fff;
 }
 
 .feature-icon img {
@@ -592,14 +601,12 @@ p {
     height: 52px;
     /* Larger icon */
     transition: var(--transition);
-    filter: none;
     /* Reset filter */
 }
 
 .feature-card:hover .feature-icon img {
     transform: scale(1.15);
     /* Stronger scale */
-    filter: invert(1);
     /* Change icon color for contrast */
 }
 
