@@ -1463,7 +1463,7 @@ p {
     }
 }
 
-@media (max-width: 768px) {git
+@media (max-width: 768px) {
     .mobile-menu-toggle {
         display: flex;
     }
@@ -1472,7 +1472,7 @@ p {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 65%;
+        width: 60%;
         /* Wider mobile menu */
         height: 100vh;
         background: white;
