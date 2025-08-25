@@ -206,6 +206,20 @@
             border-radius: 2px;
         }
 
+        /* Hamburger Animation */
+        .hamburger.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active .bar:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.active .bar:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+
         /* Hero Section */
         .hero {
             position: relative;
@@ -460,7 +474,6 @@
                 text-align: center;
                 padding: 40px 0;
                 gap: 40px;
-                margin-top: 4rem;
             }
 
             .hero-text {
@@ -522,7 +535,7 @@
                 margin: 16px 0;
             }
 
-            /* Hide the original CTA button in mobile view */
+            /* Hide the desktop CTA button in mobile view */
             .nav-container .cta-button {
                 display: none;
             }
@@ -549,22 +562,6 @@
             .hero-btn {
                 padding: 14px 28px;
                 font-size: 1rem;
-            }
-
-            /* Style for the new mobile CTA button */
-            .mobile-cta {
-                display: none;
-                /* Initially hidden */
-                width: 90%;
-                margin: 20px auto;
-                text-align: center;
-            }
-
-            .mobile-cta .cta-button {
-                display: flex;
-                /* Show the button inside the mobile menu */
-                width: 100%;
-                justify-content: center;
             }
         }
 
@@ -611,12 +608,6 @@
                     <li><a href="#">خدماتنا</a></li>
                     <li><a href="#">آراء العملاء</a></li>
                     <li><a href="#">تواصل معنا</a></li>
-                    <li class="mobile-cta-li" style="display: none;">
-                        <a href="#booking" class="cta-button">
-                            <span>احجز موعدك الآن</span>
-                            <i class="fas fa-calendar-check"></i>
-                        </a>
-                    </li>
                 </ul>
             </nav>
 
@@ -684,22 +675,14 @@
             });
         }
 
-        // Mobile menu toggle
+        // Mobile menu toggle and hamburger animation
         function setupMobileMenu() {
             const hamburger = document.querySelector('.hamburger');
             const navMenu = document.querySelector('.nav-menu');
-            const mobileCtaLi = document.querySelector('.mobile-cta-li');
 
             hamburger.addEventListener('click', () => {
                 hamburger.classList.toggle('active');
                 navMenu.classList.toggle('active');
-
-                // Toggle visibility of the mobile CTA button
-                if (navMenu.classList.contains('active')) {
-                    mobileCtaLi.style.display = 'block';
-                } else {
-                    mobileCtaLi.style.display = 'none';
-                }
             });
 
             // Close menu when clicking on a link
@@ -707,7 +690,6 @@
                 link.addEventListener('click', () => {
                     hamburger.classList.remove('active');
                     navMenu.classList.remove('active');
-                    mobileCtaLi.style.display = 'none';
                 });
             });
         }
@@ -830,14 +812,6 @@
 
             const dentalIcons = createRandomDentalIcons(15);
             setupMouseInteraction(dentalIcons);
-
-            // Hide the mobile CTA button on page load if the screen is large
-            if (window.innerWidth > 768) {
-                const mobileCtaLi = document.querySelector('.mobile-cta-li');
-                if (mobileCtaLi) {
-                    mobileCtaLi.style.display = 'none';
-                }
-            }
         });
     </script>
 </body>
