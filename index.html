@@ -223,13 +223,11 @@
         /* Hero Section */
         .hero {
             position: relative;
-            height: 100vh;
-            min-height: 700px;
+            min-height: 100vh; /* تم التعديل هنا */
             display: flex;
             align-items: center;
             background-color: white;
             overflow: hidden;
-            padding-top: 80px;
         }
 
         .hero-bg {
@@ -271,6 +269,13 @@
             font-size: 1.2rem;
             margin-bottom: 30px;
             color: var(--dark-text);
+        }
+
+        .hero-buttons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .hero-btn {
@@ -325,33 +330,70 @@
             transform: translateX(-8px);
         }
 
-        .trust-badges {
-            display: flex;
-            align-items: center;
-            margin-top: 40px;
-            flex-wrap: wrap;
-            background: rgba(255, 255, 255, 0.9);
+        .secondary-btn {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .secondary-btn:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(31, 95, 191, 0.3);
+        }
+
+        .hero-quote {
+            margin-top: 50px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary-blue), var(--primary-turquoise));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
             padding: 15px 25px;
             border-radius: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
             backdrop-filter: blur(5px);
             width: fit-content;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            gap: 15px;
+            margin-right: auto;
+            margin-left: auto;
+            line-height: 1.4;
+            letter-spacing: 0.5px;
+            position: relative;
         }
 
-        .stars {
-            color: #FFD700;
-            font-size: 1.3rem;
-            display: flex;
+        .hero-quote::before,
+        .hero-quote::after {
+            content: "\f118";
+            font-family: "Font Awesome 6 Pro";
+            font-weight: 900;
+            position: absolute;
+            font-size: 0.8em;
+            color: var(--primary-turquoise);
+            opacity: 0.7;
         }
 
-        .reviews {
-            font-weight: 700;
-            color: var(--dark-text);
-            background: var(--light-gray);
-            padding: 8px 18px;
-            border-radius: 20px;
+        .hero-quote::before {
+            right: -10px;
+            top: -10px;
+            transform: rotate(-15deg);
         }
+
+        .hero-quote::after {
+            left: -10px;
+            bottom: -10px;
+            transform: rotate(15deg);
+        }
+
 
         .hero-image {
             display: flex;
@@ -474,10 +516,11 @@
                 text-align: center;
                 padding: 40px 0;
                 gap: 40px;
+                margin-top: 4rem;
             }
 
             .hero-text {
-                padding-left: 0;
+                padding: 0 1rem;
             }
 
             .hero-text h1 {
@@ -488,9 +531,8 @@
                 font-size: 1.1rem;
             }
 
-            .trust-badges {
+            .hero-buttons {
                 justify-content: center;
-                margin: 30px auto;
             }
 
             .image-container {
@@ -504,6 +546,13 @@
 
             .nav-menu li {
                 margin: 0 10px;
+            }
+
+            .hero-quote {
+                font-size: 1.4rem;
+                margin-top: 30px;
+                width: 90%;
+                margin-bottom: 2rem; /* تم التعديل هنا */
             }
         }
 
@@ -563,6 +612,18 @@
                 padding: 14px 28px;
                 font-size: 1rem;
             }
+
+            .secondary-btn {
+                font-size: 1rem;
+            }
+
+            .hero-quote {
+                font-size: 1.1rem;
+                padding: 12px 20px;
+                width: 95%;
+                white-space: normal;
+                margin-bottom: 1.5rem; /* تم التعديل هنا */
+            }
         }
 
         @media (max-width: 480px) {
@@ -570,7 +631,15 @@
                 font-size: 2rem;
             }
 
-            .hero-btn {
+            .hero-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .hero-btn,
+            .secondary-btn {
+                width: 100%;
+                justify-content: center;
                 padding: 12px 24px;
                 font-size: 0.95rem;
             }
@@ -580,17 +649,19 @@
                 height: 240px;
             }
 
-            .trust-badges {
-                flex-direction: column;
-                gap: 10px;
-            }
-
             .reviews {
                 margin-right: 0;
             }
 
             .logo img {
                 height: 50px;
+            }
+
+            .hero-quote {
+                font-size: 1rem;
+                padding: 10px 15px;
+                white-space: normal;
+                margin-bottom: 1rem; /* تم التعديل هنا */
             }
         }
     </style>
@@ -640,26 +711,38 @@
             </div>
 
             <div class="hero-text">
-                <h1>بتخاف من دكتور الأسنان؟ </h1>
-                <p>في Jawad Dental، هنغيّر فكرتك عن عيادة الأسنان.
-                    رعاية حديثة، ألم أقل، وابتسامة تديك ثقة أكتر في نفسك.</p>
-                <a href="#booking" class="hero-btn">
-                    <span>ابدأ رحلتك للابتسامة المثالية</span>
-                    <i class="fas fa-arrow-left"></i>
-                </a>
+                <h1>بتخاف من دكتور الأسنان؟</h1>
+                <p>
+                    في Jawad Dental، هنغيّر فكرتك عن عيادة الأسنان.
+                    رعاية حديثة، ألم أقل، وابتسامة تديك ثقة أكتر في نفسك.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#booking" class="hero-btn">
+                        <span>خلّي ابتسامتك تبدأ هنا</span>
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    <a href="#services" class="secondary-btn">
+                        <span>اكتشف خدماتنا</span>
+                    </a>
+                </div>
 
-                <div class="trust-badges">
-                    <div class="reviews">أكتر من 500 مريض راضي</div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
+                <div class="hero-quote">
+                    كل ابتسامة ليها حكاية... وحكايتك لسه هتبدأ.
                 </div>
             </div>
         </div>
+    </section>
+
+    <section id="services"
+        style="height: 100vh; background-color: var(--light-gray); padding: 80px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+        <h2 style="font-size: 2.5rem; color: var(--primary-blue); margin-bottom: 20px;">خدماتنا المتكاملة</h2>
+        <p style="font-size: 1.2rem; color: var(--dark-text); max-width: 800px;">
+            نقدم في عيادة Jawad Dental مجموعة واسعة من خدمات طب الأسنان، من الفحوصات الروتينية وصولاً إلى العلاجات
+            التجميلية والجراحية المتقدمة. هدفنا هو ضمان صحة فمك وجمال ابتسامتك.
+        </p>
+        <p style="font-size: 1.2rem; color: var(--dark-text); max-width: 800px; margin-top: 15px;">
+            اكتشف كيف يمكننا أن نحدث فرقًا في حياتك.
+        </p>
     </section>
 
     <script>
@@ -716,8 +799,7 @@
 
         // Enhanced CTA button hover effects
         function enhanceButtonEffects() {
-            const buttons = document.querySelectorAll('.cta-button, .hero-btn');
-
+            const buttons = document.querySelectorAll('.cta-button, .hero-btn, .secondary-btn');
             buttons.forEach(button => {
                 button.addEventListener('mouseenter', function () {
                     this.style.transform = 'translateY(-3px)';
