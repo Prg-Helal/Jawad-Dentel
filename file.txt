@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jawad Dental | عيادة طب الأسنان</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* CSS Variables */
@@ -17,6 +19,7 @@
             --dark-text: #2d3748;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
+            --border-radius: 12px;
         }
 
         /* Global Styles */
@@ -50,24 +53,23 @@
             padding: 0 20px;
         }
 
-        /* Header & Navigation - Improved Design */
+        /* Header & Navigation */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: rgba(255, 255, 255, 0.98);
             transition: var(--transition);
-            padding: 15px 0;
+            padding: 12px 0;
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(31, 95, 191, 0.1);
         }
 
         header.scrolled {
             box-shadow: var(--shadow);
-            padding: 10px 0;
-            background-color: rgba(255, 255, 255, 0.98);
+            padding: 8px 0;
         }
 
         .nav-container {
@@ -77,28 +79,17 @@
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary-blue);
             display: flex;
             align-items: center;
-            position: relative;
         }
 
-        .logo i {
-            margin-left: 8px;
-            color: var(--primary-turquoise);
+        .logo img {
+            height: 60px;
+            transition: var(--transition);
         }
 
-        .logo:after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            right: 0;
-            width: 30px;
-            height: 3px;
-            background: linear-gradient(to left, var(--primary-blue), var(--primary-turquoise));
-            border-radius: 2px;
+        header.scrolled .logo img {
+            height: 50px;
         }
 
         .nav-menu {
@@ -117,6 +108,7 @@
             transition: var(--transition);
             position: relative;
             padding: 8px 5px;
+            color: var(--dark-text);
         }
 
         .nav-menu a:after {
@@ -143,7 +135,7 @@
             background: linear-gradient(to left, var(--primary-blue), var(--primary-turquoise));
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 12px 28px;
             border-radius: 50px;
             font-weight: 700;
             cursor: pointer;
@@ -151,6 +143,10 @@
             box-shadow: 0 4px 15px rgba(31, 95, 191, 0.3);
             position: relative;
             overflow: hidden;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .cta-button:before {
@@ -166,18 +162,28 @@
             z-index: 1;
         }
 
-        .cta-button:hover:before {
-            opacity: 1;
-        }
-
         .cta-button span {
             position: relative;
             z-index: 2;
         }
 
+        .cta-button i {
+            position: relative;
+            z-index: 2;
+            transition: var(--transition);
+        }
+
+        .cta-button:hover:before {
+            opacity: 1;
+        }
+
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(31, 95, 191, 0.4);
+            box-shadow: 0 8px 20px rgba(31, 95, 191, 0.4);
+        }
+
+        .cta-button:hover i {
+            transform: translateX(-5px);
         }
 
         .hamburger {
@@ -186,6 +192,8 @@
             width: 30px;
             height: 30px;
             position: relative;
+            background: none;
+            border: none;
         }
 
         .bar {
@@ -198,15 +206,71 @@
             border-radius: 2px;
         }
 
-        /* Hero Section - Improved Design */
+        /* Hamburger Animation */
+        .hamburger.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active .bar:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.active .bar:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        /* WhatsApp Floating Icon */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 999;
+        }
+
+        .whatsapp-icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            font-size: 28px;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.1s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-icon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+            }
+        }
+
+        /* Hero Section */
         .hero {
             position: relative;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             background-color: white;
             overflow: hidden;
             padding-top: 80px;
+            /* To prevent content from being hidden behind the fixed header */
         }
 
         .hero-bg {
@@ -219,40 +283,25 @@
             z-index: -1;
         }
 
-        /* New Background Image with Overlay */
-        .hero-bg-image {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://images.unsplash.com/photo-1544006650-7c2e5c6d5c8f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80');
-            background-size: cover;
-            background-position: center;
-            opacity: 0.15;
-            z-index: -2;
-        }
-
         .hero-content {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
             align-items: center;
-            justify-content: space-between;
             width: 100%;
         }
 
         .hero-text {
-            flex: 1;
-            max-width: 600px;
             animation: fadeIn 1s ease forwards;
             position: relative;
             z-index: 5;
+            padding-left: 20px;
         }
 
         .hero-text h1 {
-            font-size: 3.5rem;
+            font-size: 3.2rem;
             font-weight: 800;
             margin-bottom: 20px;
-            color: var(--primary-blue);
             line-height: 1.2;
             background: linear-gradient(to left, var(--primary-blue), var(--primary-turquoise));
             -webkit-background-clip: text;
@@ -263,7 +312,13 @@
             font-size: 1.2rem;
             margin-bottom: 30px;
             color: var(--dark-text);
-            max-width: 90%;
+        }
+
+        .hero-buttons {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .hero-btn {
@@ -271,14 +326,15 @@
             align-items: center;
             background: linear-gradient(to left, var(--primary-blue), var(--primary-turquoise));
             color: white;
-            padding: 18px 40px;
+            padding: 16px 36px;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             transition: var(--transition);
-            box-shadow: 0 4px 20px rgba(31, 95, 191, 0.4);
+            box-shadow: 0 6px 20px rgba(31, 95, 191, 0.4);
             position: relative;
             overflow: hidden;
+            gap: 12px;
         }
 
         .hero-btn:before {
@@ -293,58 +349,95 @@
             transition: var(--transition);
         }
 
-        .hero-btn:hover:before {
-            opacity: 1;
-        }
-
         .hero-btn span {
             position: relative;
             z-index: 2;
         }
 
         .hero-btn i {
-            margin-right: 15px;
             position: relative;
             z-index: 2;
-            animation: bounce 2s infinite;
+            transition: var(--transition);
+        }
+
+        .hero-btn:hover:before {
+            opacity: 1;
         }
 
         .hero-btn:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(31, 95, 191, 0.5);
+            box-shadow: 0 10px 25px rgba(31, 95, 191, 0.5);
         }
 
-        .trust-badges {
-            display: flex;
-            align-items: center;
-            margin-top: 40px;
-            flex-wrap: wrap;
-            background: rgba(255, 255, 255, 0.8);
+        .hero-btn:hover i {
+            transform: translateX(-8px);
+        }
+
+        .secondary-btn {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .secondary-btn:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(31, 95, 191, 0.3);
+        }
+
+        .hero-quote {
+            margin-top: 50px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary-blue), var(--primary-turquoise));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
             padding: 15px 25px;
             border-radius: 15px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
             backdrop-filter: blur(5px);
             width: fit-content;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-right: auto;
+            margin-left: auto;
+            line-height: 1.4;
+            letter-spacing: 0.5px;
+            position: relative;
         }
 
-        .stars {
-            color: #FFD700;
-            font-size: 1.4rem;
-            margin-left: 15px;
-            display: flex;
+        .hero-quote::before,
+        .hero-quote::after {
+            content: "\f118";
+            font-family: "Font Awesome 6 Pro";
+            font-weight: 900;
+            position: absolute;
+            font-size: 0.8em;
+            color: var(--primary-turquoise);
+            opacity: 0.7;
         }
 
-        .reviews {
-            font-weight: 700;
-            color: var(--dark-text);
-            background: var(--light-gray);
-            padding: 8px 18px;
-            border-radius: 20px;
-            margin-right: 15px;
+        .hero-quote::before {
+            right: -10px;
+            top: -10px;
+            transform: rotate(-15deg);
+        }
+
+        .hero-quote::after {
+            left: -10px;
+            bottom: -10px;
+            transform: rotate(15deg);
         }
 
         .hero-image {
-            flex: 1;
             display: flex;
             justify-content: center;
             animation: slideIn 1s ease forwards;
@@ -354,13 +447,13 @@
 
         .image-container {
             position: relative;
-            width: 400px;
-            height: 400px;
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            width: 100%;
+            max-width: 450px;
+            height: 450px;
             overflow: hidden;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-radius: 30% 70% 50% 50% / 30% 30% 70% 70%;
             border: 5px solid white;
-            animation: morphing 10s ease-in-out infinite;
         }
 
         .image-container img {
@@ -378,33 +471,15 @@
             background: linear-gradient(45deg, rgba(31, 95, 191, 0.1), rgba(25, 182, 209, 0.1));
         }
 
-        .floating-icon {
+        /* Dental Icons as Design Elements */
+        .dental-icon {
             position: absolute;
-            z-index: 2;
-        }
-
-        .icon-1 {
-            top: 20%;
-            left: 10%;
-            color: var(--primary-blue);
-            font-size: 2rem;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .icon-2 {
-            top: 60%;
-            right: 15%;
+            font-size: 24px;
             color: var(--primary-turquoise);
-            font-size: 1.8rem;
-            animation: float 7s ease-in-out infinite;
-        }
-
-        .icon-3 {
-            bottom: 20%;
-            left: 20%;
-            color: var(--primary-blue);
-            font-size: 2.2rem;
-            animation: float 5s ease-in-out infinite;
+            opacity: 0.5;
+            z-index: 1;
+            animation: float 6s ease-in-out infinite;
+            transition: text-shadow 0.3s ease-out;
         }
 
         /* New Creative Elements */
@@ -412,7 +487,7 @@
             position: absolute;
             border-radius: 50%;
             background: linear-gradient(45deg, var(--primary-blue), var(--primary-turquoise));
-            opacity: 0.1;
+            opacity: 0.08;
             z-index: 1;
         }
 
@@ -437,94 +512,65 @@
             right: 200px;
         }
 
-        .dental-icon {
-            position: absolute;
-            font-size: 24px;
-            color: var(--primary-turquoise);
-            opacity: 0.5;
-            z-index: 1;
+        /* New Gallery Section */
+        .gallery-section {
+            background-color: transparent;
+            padding: 4px 0;
         }
 
-        /* New Features */
-        .appointment-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: linear-gradient(to left, var(--primary-blue), var(--primary-turquoise));
-            color: white;
-            padding: 15px 0;
+        .gallery-section h2 {
             text-align: center;
-            z-index: 999;
-            transform: translateY(100%);
-            transition: transform 0.5s ease;
-            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        .appointment-bar.visible {
-            transform: translateY(0);
-        }
-
-        .appointment-bar-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .appointment-text {
-            font-weight: 500;
-        }
-
-        .appointment-btn {
-            background: white;
-            color: var(--primary-blue);
-            border: none;
-            padding: 10px 20px;
-            border-radius: 50px;
+            font-size: 2.5rem;
             font-weight: 700;
-            cursor: pointer;
+            margin-bottom: 40px;
+            color: var(--primary-blue);
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            height: 50vh;
+        }
+
+        .gallery-image-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
             transition: var(--transition);
         }
 
-        .appointment-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        .gallery-image-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
-        .stats-container {
+        .gallery-image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .gallery-image-card .image-card-overlay {
             position: absolute;
-            bottom: 30px;
-            left: 30px;
-            display: flex;
-            gap: 20px;
-            z-index: 5;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            transition: var(--transition);
+            z-index: 1;
         }
 
-        .stat-item {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 15px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(5px);
-            animation: fadeIn 1.5s ease forwards;
-            animation-delay: 0.5s;
-            opacity: 0;
+        /* Overlay on the first and last images for the fade effect */
+        .image-gallery .gallery-image-card:first-child .image-card-overlay {
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.7));
         }
 
-        .stat-number {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary-blue);
-            margin-bottom: 5px;
-        }
-
-        .stat-text {
-            font-size: 0.9rem;
-            color: var(--dark-text);
+        .image-gallery .gallery-image-card:last-child .image-card-overlay {
+            background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.7));
         }
 
         /* Animations */
@@ -533,6 +579,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -544,6 +591,7 @@
                 opacity: 0;
                 transform: translateX(50px);
             }
+
             to {
                 opacity: 1;
                 transform: translateX(0);
@@ -554,140 +602,80 @@
             0% {
                 transform: translateY(0) rotate(0deg);
             }
+
             50% {
-                transform: translateY(-20px) rotate(10deg);
+                transform: translateY(-15px) rotate(5deg);
             }
+
             100% {
                 transform: translateY(0) rotate(0deg);
-            }
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(0);
-            }
-            40% {
-                transform: translateX(-10px);
-            }
-            60% {
-                transform: translateX(-5px);
-            }
-        }
-
-        @keyframes morphing {
-            0% {
-                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            }
-            25% {
-                border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%;
-            }
-            50% {
-                border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%;
-            }
-            75% {
-                border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%;
-            }
-            100% {
-                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            }
-        }
-
-        /* Particles */
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            background-color: rgba(31, 95, 191, 0.1);
-            border-radius: 50%;
-            animation: floatParticle 15s infinite linear;
-        }
-
-        @keyframes floatParticle {
-            0% {
-                transform: translateY(0) translateX(0) rotate(0deg);
-            }
-            100% {
-                transform: translateY(-100vh) translateX(100px) rotate(360deg);
             }
         }
 
         /* Responsive Design */
         @media (max-width: 992px) {
             .hero-content {
-                flex-direction: column;
+                grid-template-columns: 1fr;
                 text-align: center;
                 padding: 40px 0;
+                gap: 40px;
+                margin-top: 4rem;
             }
 
             .hero-text {
-                max-width: 100%;
-                margin-bottom: 40px;
+                padding: 0 1rem;
             }
 
             .hero-text h1 {
-                font-size: 2.8rem;
-            }
-            
-            .hero-text p {
-                max-width: 100%;
+                font-size: 2.5rem;
             }
 
-            .trust-badges {
+            .hero-text p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
                 justify-content: center;
-                margin: 30px auto;
             }
 
             .image-container {
                 width: 320px;
                 height: 320px;
             }
-            
+
             .nav-menu {
                 margin-left: 20px;
             }
-            
+
             .nav-menu li {
                 margin: 0 10px;
             }
-            
-            .stats-container {
-                position: relative;
-                bottom: 0;
-                left: 0;
-                justify-content: center;
-                width: 100%;
+
+            .hero-quote {
+                font-size: 1.4rem;
                 margin-top: 30px;
+                width: 90%;
+                margin-bottom: 2rem;
             }
-            
-            .appointment-bar-content {
-                flex-direction: column;
-                gap: 10px;
+
+            .cta-button {
+                display: none;
+            }
+
+            /* Responsive for Gallery Section */
+            .image-gallery {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .gallery-image-card:first-child .image-card-overlay,
+            .gallery-image-card:last-child .image-card-overlay {
+                background: none;
             }
         }
 
         @media (max-width: 768px) {
             .hamburger {
                 display: block;
-            }
-
-            .hamburger.active .bar:nth-child(2) {
-                opacity: 0;
-            }
-
-            .hamburger.active .bar:nth-child(1) {
-                transform: translateY(8px) rotate(45deg);
-            }
-
-            .hamburger.active .bar:nth-child(3) {
-                transform: translateY(-8px) rotate(-45deg);
             }
 
             .nav-menu {
@@ -713,8 +701,12 @@
                 margin: 16px 0;
             }
 
+            .cta-button {
+                display: none;
+            }
+
             .hero-text h1 {
-                font-size: 2.3rem;
+                font-size: 2.2rem;
             }
 
             .hero-text p {
@@ -726,21 +718,43 @@
                 height: 280px;
             }
 
-            .circle-1, .circle-2, .circle-3 {
+            .circle-1,
+            .circle-2,
+            .circle-3 {
                 display: none;
             }
-            
+
             .hero-btn {
-                padding: 15px 30px;
+                padding: 14px 28px;
+                font-size: 1rem;
+            }
+
+            .secondary-btn {
+                font-size: 1rem;
+            }
+
+            .hero-quote {
                 font-size: 1.1rem;
+                padding: 12px 20px;
+                width: 95%;
+                white-space: normal;
+                margin-bottom: 1.5rem;
             }
-            
-            .stat-item {
-                padding: 10px;
+
+            .whatsapp-float {
+                bottom: 15px;
+                left: 15px;
             }
-            
-            .stat-number {
-                font-size: 1.5rem;
+
+            .whatsapp-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+            }
+
+            /* Responsive for Gallery Section */
+            .image-gallery {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -749,9 +763,17 @@
                 font-size: 2rem;
             }
 
-            .hero-btn {
-                padding: 12px 25px;
-                font-size: 1rem;
+            .hero-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .hero-btn,
+            .secondary-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 24px;
+                font-size: 0.95rem;
             }
 
             .image-container {
@@ -759,188 +781,132 @@
                 height: 240px;
             }
 
-            .logo {
-                font-size: 1.5rem;
-            }
-            
-            .trust-badges {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
             .reviews {
                 margin-right: 0;
             }
-            
-            .stats-container {
-                flex-wrap: wrap;
+
+            .logo img {
+                height: 50px;
+            }
+
+            .hero-quote {
+                font-size: 1rem;
+                padding: 10px 15px;
+                white-space: normal;
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Media query عشان نطبق التعديلات دي على الشاشات الأصغر من 992px */
+        @media (max-width: 992px) {
+
+            /* بنعدل تنسيق الـ gallery عشان يعرض صورة واحدة بس في كل صف */
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            /* بنلغي تأثير الـ fade على الصور الجانبية في الشاشات الصغيرة */
+            .gallery-image-card:first-child .image-card-overlay,
+            .gallery-image-card:last-child .image-card-overlay {
+                background: none;
             }
         }
     </style>
 </head>
+
 <body>
-    <!-- Header & Navigation -->
     <header id="header">
         <div class="container nav-container">
             <a href="#" class="logo">
-                Jawad Dental <i class="fas fa-tooth"></i>
+                <img src="assets/images/logo.png" alt="Jawad Dental Clinic Logo">
             </a>
-            
             <nav>
                 <ul class="nav-menu">
-                    <li><a href="#">الرئيسية</a></li>
-                    <li><a href="#">خدماتنا</a></li>
-                    <li><a href="#">آراء العملاء</a></li>
-                    <li><a href="#">تواصل معنا</a></li>
+                    <li><a href="#hero">الرئيسية</a></li>
+                    <li><a href="#about">عنا</a></li>
+                    <li><a href="#services">خدماتنا</a></li>
+                    <li><a href="#gallery">معرض الصور</a></li>
+                    <li><a href="#contact">تواصل معنا</a></li>
                 </ul>
             </nav>
-            
-            <button class="cta-button"><span>احجز الآن</span></button>
-            
-            <div class="hamburger">
+
+            <button class="cta-button desktop-cta">
+                <span>احجز الآن</span>
+                <i class="fas fa-calendar-check"></i>
+            </button>
+
+            <button class="hamburger">
                 <span class="bar"></span>
                 <span class="bar"></span>
                 <span class="bar"></span>
-            </div>
+            </button>
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero" id="hero">
         <div class="hero-bg"></div>
-        <div class="hero-bg-image"></div>
-        
-        <!-- Animated Shapes -->
+
         <div class="circle-shape circle-1"></div>
         <div class="circle-shape circle-2"></div>
         <div class="circle-shape circle-3"></div>
-        
-        <!-- Animated Particles -->
-        <div class="particles" id="particles"></div>
-        
+
         <div class="container hero-content">
-            <div class="hero-text">
-                <h1>ابتسامتك تستاهل ثقة وراحة</h1>
-                <p>لو سنانك مش زي ما بتحلم، أو عندك خوف من دكاترة الأسنان… جواد بيخلي التجربة مختلفة، آمنة، ومريحة.</p>
-                <a href="#booking" class="hero-btn">
-                    <span>ابدأ رحلتك للابتسامة المثالية</span>
-                    <i class="fas fa-arrow-left"></i>
-                </a>
-                
-                <div class="trust-badges">
-                    <div class="reviews">أكتر من 500 مريض راضي</div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                </div>
-            </div>
-            
             <div class="hero-image">
                 <div class="image-container">
-                    <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80" alt="Patient smiling after dental treatment at Jawad Dental clinic">
+                    <img src="assets/images/jawad-image.jpg" alt="طبيب أسنان محترف في عيادة جواد">
                     <div class="image-overlay"></div>
-                    
-                    <!-- Floating Icons -->
-                    <div class="floating-icon icon-1">
-                        <i class="fas fa-tooth"></i>
-                    </div>
-                    <div class="floating-icon icon-2">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <div class="floating-icon icon-3">
-                        <i class="fas fa-heart"></i>
-                    </div>
                 </div>
             </div>
-        </div>
-        
-        <!-- Stats Section -->
-        <div class="stats-container">
-            <div class="stat-item">
-                <div class="stat-number">+500</div>
-                <div class="stat-text">عملاء سعداء</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">15+</div>
-                <div class="stat-text">سنوات خبرة</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">98%</div>
-                <div class="stat-text">نجاح المعالجات</div>
+
+            <div class="hero-text">
+                <h1>بتخاف من دكتور الأسنان؟</h1>
+                <p>
+                    في Jawad Dental، هنغيّر فكرتك عن عيادة الأسنان.
+                    رعاية حديثة، ألم أقل، وابتسامة تديك ثقة أكتر في نفسك.
+                </p>
+                <div class="hero-buttons">
+                    <a href="https://wa.me/YOUR_PHONE_NUMBER" class="hero-btn">
+                        <span>خلّي ابتسامتك تبدأ هنا</span>
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                    <a href="tel:YOUR_PHONE_NUMBER" class="secondary-btn">
+                        <span>اتصل بنا الآن</span>
+                    </a>
+                </div>
+
+                <div class="hero-quote">
+                    كل ابتسامة ليها حكاية... وحكايتك لسه هتبدأ.
+                </div>
             </div>
         </div>
     </section>
-    
-    <!-- Appointment Bar -->
-    <div class="appointment-bar" id="appointmentBar">
-        <div class="appointment-bar-content">
-            <div class="appointment-text">احجز موعدك الآن واحصل على استشارة مجانية</div>
-            <button class="appointment-btn">احجز الآن</button>
+
+    <section class="gallery-section" id="gallery">
+        <div class="container" style="max-width: 100% !important;">
+            <div class="image-gallery">
+                <div class="gallery-image-card">
+                    <img src="assets/images/image-1.jpg" alt="طبيب أسنان يعالج طفل">
+                    <div class="image-card-overlay"></div>
+                </div>
+                <div class="gallery-image-card">
+                    <img src="assets/images/image-2.jpg" alt="فتاة سعيدة في عيادة الأسنان">
+                    <div class="image-card-overlay"></div>
+                </div>
+                <div class="gallery-image-card">
+                    <img src="assets/images/image-3.jpg" alt="طبيبة أسنان أثناء العمل">
+                    <div class="image-card-overlay"></div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <a href="https://wa.me/YOUR_PHONE_NUMBER" class="whatsapp-float" target="_blank" aria-label="تواصل معنا عبر واتساب">
+        <div class="whatsapp-icon">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+    </a>
 
     <script>
-        // Create floating particles
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particlesCount = 20;
-            
-            for (let i = 0; i < particlesCount; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // Random size between 5 and 15px
-                const size = Math.floor(Math.random() * 10) + 5;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                
-                // Random position
-                particle.style.top = `${Math.random() * 100}vh`;
-                particle.style.left = `${Math.random() * 100}vw`;
-                
-                // Random animation delay
-                particle.style.animationDelay = `${Math.random() * 5}s`;
-                
-                // Random color (blue or turquoise with opacity)
-                const colors = [
-                    'rgba(31, 95, 191, 0.2)',
-                    'rgba(25, 182, 209, 0.2)'
-                ];
-                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                
-                particlesContainer.appendChild(particle);
-            }
-        }
-        
-        // Create dental icons in background
-        function createDentalIcons() {
-            const heroSection = document.getElementById('hero');
-            const iconsCount = 8;
-            
-            for (let i = 0; i < iconsCount; i++) {
-                const icon = document.createElement('i');
-                icon.className = 'dental-icon fas fa-tooth';
-                
-                // Random position
-                icon.style.top = `${Math.random() * 100}vh`;
-                icon.style.left = `${Math.random() * 100}vw`;
-                
-                // Random animation delay
-                icon.style.animation = `float ${10 + Math.random() * 10}s ease-in-out infinite`;
-                icon.style.animationDelay = `${Math.random() * 5}s`;
-                
-                // Random size
-                const size = 16 + Math.floor(Math.random() * 20);
-                icon.style.fontSize = `${size}px`;
-                
-                heroSection.appendChild(icon);
-            }
-        }
-        
         // Sticky header on scroll
         function handleHeaderOnScroll() {
             const header = document.getElementById('header');
@@ -952,29 +918,17 @@
                 }
             });
         }
-        
-        // Show appointment bar on scroll
-        function handleAppointmentBar() {
-            const appointmentBar = document.getElementById('appointmentBar');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 300) {
-                    appointmentBar.classList.add('visible');
-                } else {
-                    appointmentBar.classList.remove('visible');
-                }
-            });
-        }
-        
-        // Mobile menu toggle
+
+        // Mobile menu toggle and hamburger animation
         function setupMobileMenu() {
             const hamburger = document.querySelector('.hamburger');
             const navMenu = document.querySelector('.nav-menu');
-            
+
             hamburger.addEventListener('click', () => {
                 hamburger.classList.toggle('active');
                 navMenu.classList.toggle('active');
             });
-            
+
             // Close menu when clicking on a link
             document.querySelectorAll('.nav-menu a').forEach(link => {
                 link.addEventListener('click', () => {
@@ -983,16 +937,16 @@
                 });
             });
         }
-        
+
         // Smooth scrolling for navigation links
         function setupSmoothScrolling() {
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
+                anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    
+
                     const targetId = this.getAttribute('href');
                     if (targetId === '#') return;
-                    
+
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
                         window.scrollTo({
@@ -1003,16 +957,171 @@
                 });
             });
         }
-        
+
+        // Enhanced CTA button hover effects
+        function enhanceButtonEffects() {
+            const buttons = document.querySelectorAll('.cta-button, .hero-btn, .secondary-btn');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function () {
+                    this.style.transform = 'translateY(-3px)';
+                });
+
+                button.addEventListener('mouseleave', function () {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        }
+
+        // ✨ Function to create random dental icons
+        function createRandomDentalIcons(count) {
+            const heroSection = document.getElementById('hero');
+            const defaultIconColor = '#19B6D1';
+            const minSize = 16;
+            const maxSize = 30;
+            const maxDelay = 6;
+            const icons = [];
+
+            for (let i = 0; i < count; i++) {
+                const icon = document.createElement('i');
+                icon.className = 'dental-icon fas fa-tooth';
+                const size = Math.random() * (maxSize - minSize) + minSize;
+                const opacity = Math.random() * 0.4 + 0.1;
+                const top = Math.random() * 100;
+                const left = Math.random() * 100;
+                const delay = Math.random() * maxDelay;
+
+                icon.style.cssText = `
+                    position: absolute;
+                    top: ${top}%;
+                    left: ${left}%;
+                    font-size: ${size}px;
+                    opacity: ${opacity};
+                    color: ${defaultIconColor};
+                    animation-delay: ${delay}s;
+                `;
+                heroSection.appendChild(icon);
+                icons.push(icon);
+            }
+            return icons;
+        }
+
+        // ✨ Function to track mouse movement and apply a glow effect
+        function setupMouseInteraction(icons) {
+            const heroSection = document.getElementById('hero');
+            const glowColor = '255, 255, 255';
+
+            heroSection.addEventListener('mousemove', (e) => {
+                const rect = heroSection.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+
+                icons.forEach(icon => {
+                    const iconRect = icon.getBoundingClientRect();
+                    const iconX = iconRect.left - rect.left + iconRect.width / 2;
+                    const iconY = iconRect.top - rect.top + iconRect.height / 2;
+
+                    const deltaX = mouseX - iconX;
+                    const deltaY = mouseY - iconY;
+
+                    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                    const maxDistance = 300;
+
+                    if (distance < maxDistance) {
+                        const proximity = 1 - (distance / maxDistance);
+                        const glowSize = 15 * proximity;
+                        const glowOpacity = 1 * proximity;
+
+                        icon.style.textShadow = `0 0 ${glowSize}px rgba(${glowColor}, ${glowOpacity})`;
+
+                    } else {
+                        icon.style.textShadow = 'none';
+                    }
+                });
+            });
+
+            heroSection.addEventListener('mouseleave', () => {
+                icons.forEach(icon => {
+                    icon.style.textShadow = 'none';
+                });
+            });
+        }
+
         // Initialize all functions when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
-            createParticles();
-            createDentalIcons();
             handleHeaderOnScroll();
-            handleAppointmentBar();
             setupMobileMenu();
             setupSmoothScrolling();
+            enhanceButtonEffects();
+
+            const dentalIcons = createRandomDentalIcons(15);
+            setupMouseInteraction(dentalIcons);
         });
+        // New function to handle the gallery for smaller screens
+        function setupResponsiveGallery() {
+            const gallery = document.querySelector('.image-gallery');
+            const cards = document.querySelectorAll('.gallery-image-card');
+            let currentIndex = 0;
+            let intervalId = null;
+
+            // We check if the screen is mobile (max-width: 768px in your CSS)
+            const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+            // If it's a mobile screen, we hide all images except the first one and set up the fade effect.
+            if (isMobile) {
+                gallery.style.height = 'auto'; // عشان تتناسب مع الصورة الواحدة
+                cards.forEach((card, index) => {
+                    if (index !== 0) {
+                        card.style.display = 'none';
+                    }
+                });
+
+                const fadeInOut = () => {
+                    // First, hide the current image smoothly
+                    cards[currentIndex].style.opacity = '0';
+                    setTimeout(() => {
+                        cards[currentIndex].style.display = 'none';
+
+                        // Then, move to the next image
+                        currentIndex = (currentIndex + 1) % cards.length;
+
+                        // Show the next image smoothly
+                        cards[currentIndex].style.display = 'block';
+                        setTimeout(() => {
+                            cards[currentIndex].style.opacity = '1';
+                        }, 50); // A small delay to ensure the display change is registered
+                    }, 500); // Wait 0.5 seconds for the fade-out to finish
+                };
+
+                // Start the automatic slideshow
+                intervalId = setInterval(fadeInOut, 3000); // Change image every 3 seconds
+            } else {
+                // If it's a desktop screen, make sure all images are visible and clear the interval
+                if (intervalId) {
+                    clearInterval(intervalId);
+                    intervalId = null;
+                }
+                cards.forEach(card => {
+                    card.style.display = 'block';
+                    card.style.opacity = '1';
+                });
+            }
+        }
+
+        // Event listener عشان نضمن ان الكود بيشتغل لما الصفحة تحمل
+        document.addEventListener('DOMContentLoaded', () => {
+            // ... all your existing functions
+            handleHeaderOnScroll();
+            setupMobileMenu();
+            setupSmoothScrolling();
+            enhanceButtonEffects();
+
+            // Call the new function
+            setupResponsiveGallery();
+        });
+
+        // We also call the function when the window is resized, so it works correctly if the user changes screen size
+        window.addEventListener('resize', setupResponsiveGallery);
     </script>
 </body>
+
 </html>
