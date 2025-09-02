@@ -266,6 +266,7 @@
             position: relative;
             min-height: 100vh;
             display: flex;
+            flex-direction: row-reverse;
             align-items: center;
             background-color: white;
             overflow: hidden;
@@ -775,7 +776,7 @@
             /* Responsive for Gallery Section */
             .image-gallery {
                 display: block;
-                height: 60vh;
+                height: 40vh;
             }
 
             .gallery-image-card {
@@ -884,7 +885,12 @@
 
         <div class="container hero-content">
 
-
+            <div class="hero-image">
+                <div class="image-container">
+                    <img src="assets/images/jawad-image.jpg" alt="طبيب أسنان محترف في عيادة جواد">
+                    <div class="image-overlay"></div>
+                </div>
+            </div>
             <div class="hero-text">
                 <h1>بتخاف من دكتور الأسنان؟</h1>
                 <p>
@@ -906,12 +912,7 @@
                 </div>
             </div>
 
-            <div class="hero-image">
-                <div class="image-container">
-                    <img src="assets/images/jawad-image.jpg" alt="طبيب أسنان محترف في عيادة جواد">
-                    <div class="image-overlay"></div>
-                </div>
-            </div>
+
         </div>
     </section>
 
