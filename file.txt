@@ -266,11 +266,11 @@
             position: relative;
             min-height: 100vh;
             display: flex;
+            flex-direction: row-reverse;
             align-items: center;
             background-color: white;
             overflow: hidden;
             padding-top: 80px;
-            /* To prevent content from being hidden behind the fixed header */
         }
 
         .hero-bg {
@@ -347,6 +347,7 @@
             background: linear-gradient(to left, var(--primary-turquoise), var(--primary-blue));
             opacity: 0;
             transition: var(--transition);
+            z-index: 1;
         }
 
         .hero-btn span {
@@ -512,7 +513,7 @@
             right: 200px;
         }
 
-        /* New Gallery Section */
+        /* Gallery Section */
         .gallery-section {
             background-color: transparent;
             padding: 4px 0;
@@ -531,6 +532,7 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
             height: 50vh;
+            position: relative;
         }
 
         .gallery-image-card {
@@ -538,7 +540,7 @@
             overflow: hidden;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
-            transition: var(--transition);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .gallery-image-card:hover {
@@ -551,26 +553,50 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: var(--transition);
         }
 
+        /* Overlay and Label for Gallery Images */
         .gallery-image-card .image-card-overlay {
             position: absolute;
             top: 0;
             right: 0;
             width: 100%;
             height: 100%;
-            transition: var(--transition);
+            background: linear-gradient(180deg, rgba(31, 95, 191, 0.1) 0%, rgba(25, 182, 209, 0.4) 100%);
             z-index: 1;
+            pointer-events: none;
+            display: flex;
+            align-items: flex-end;
+            padding: 15px;
         }
 
-        /* Overlay on the first and last images for the fade effect */
-        .image-gallery .gallery-image-card:first-child .image-card-overlay {
-            background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.7));
+        .gallery-image-card .marketing-label {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            background: linear-gradient(to right, var(--primary-blue), var(--primary-turquoise));
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            z-index: 2;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
         }
 
-        .image-gallery .gallery-image-card:last-child .image-card-overlay {
-            background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.7));
+        /* New rules to restore the fade-out effect on large screens */
+        @media (min-width: 993px) {
+            .gallery-image-card:first-child .image-card-overlay {
+                background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.942) 100%),
+                    linear-gradient(180deg, rgba(31, 95, 191, 0.1) 0%, rgba(25, 182, 209, 0.4) 100%);
+            }
+
+            .gallery-image-card:last-child .image-card-overlay {
+                background: linear-gradient(to left, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.7) 100%),
+                    linear-gradient(180deg, rgba(31, 95, 191, 0.1) 0%, rgba(25, 182, 209, 0.4) 100%);
+            }
         }
 
         /* Animations */
@@ -666,11 +692,6 @@
             .image-gallery {
                 grid-template-columns: 1fr 1fr;
             }
-
-            .gallery-image-card:first-child .image-card-overlay,
-            .gallery-image-card:last-child .image-card-overlay {
-                background: none;
-            }
         }
 
         @media (max-width: 768px) {
@@ -754,7 +775,34 @@
 
             /* Responsive for Gallery Section */
             .image-gallery {
-                grid-template-columns: 1fr;
+                display: block;
+                height: 40vh;
+            }
+
+            .gallery-image-card {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                transition: opacity 1s ease-in-out;
+            }
+
+            .gallery-image-card:first-child {
+                opacity: 1;
+            }
+
+            .gallery-image-card:hover {
+                transform: translateY(0);
+                box-shadow: var(--shadow);
+            }
+
+            .gallery-image-card .marketing-label {
+                font-size: 0.8rem;
+                padding: 6px 10px;
+                bottom: 10px;
+                left: 10px;
             }
         }
 
@@ -794,21 +842,6 @@
                 padding: 10px 15px;
                 white-space: normal;
                 margin-bottom: 1rem;
-            }
-        }
-
-        /* Media query عشان نطبق التعديلات دي على الشاشات الأصغر من 992px */
-        @media (max-width: 992px) {
-
-            /* بنعدل تنسيق الـ gallery عشان يعرض صورة واحدة بس في كل صف */
-            .image-gallery {
-                grid-template-columns: 1fr;
-            }
-
-            /* بنلغي تأثير الـ fade على الصور الجانبية في الشاشات الصغيرة */
-            .gallery-image-card:first-child .image-card-overlay,
-            .gallery-image-card:last-child .image-card-overlay {
-                background: none;
             }
         }
     </style>
@@ -851,18 +884,18 @@
         <div class="circle-shape circle-3"></div>
 
         <div class="container hero-content">
+
             <div class="hero-image">
                 <div class="image-container">
                     <img src="assets/images/jawad-image.jpg" alt="طبيب أسنان محترف في عيادة جواد">
                     <div class="image-overlay"></div>
                 </div>
             </div>
-
             <div class="hero-text">
                 <h1>بتخاف من دكتور الأسنان؟</h1>
                 <p>
                     في Jawad Dental، هنغيّر فكرتك عن عيادة الأسنان.
-                    رعاية حديثة، ألم أقل، وابتسامة تديك ثقة أكتر في نفسك.
+                    رعاية حديثة، ألم أقل، وابتسامة تديك ثقة اكتر في نفسك.
                 </p>
                 <div class="hero-buttons">
                     <a href="https://wa.me/YOUR_PHONE_NUMBER" class="hero-btn">
@@ -878,6 +911,8 @@
                     كل ابتسامة ليها حكاية... وحكايتك لسه هتبدأ.
                 </div>
             </div>
+
+
         </div>
     </section>
 
@@ -886,15 +921,21 @@
             <div class="image-gallery">
                 <div class="gallery-image-card">
                     <img src="assets/images/image-1.jpg" alt="طبيب أسنان يعالج طفل">
-                    <div class="image-card-overlay"></div>
+                    <div class="image-card-overlay">
+                        <span class="marketing-label">عيادة الأسنان الرائدة</span>
+                    </div>
                 </div>
                 <div class="gallery-image-card">
                     <img src="assets/images/image-2.jpg" alt="فتاة سعيدة في عيادة الأسنان">
-                    <div class="image-card-overlay"></div>
+                    <div class="image-card-overlay">
+                        <span class="marketing-label">ابتسامة واثقة</span>
+                    </div>
                 </div>
                 <div class="gallery-image-card">
                     <img src="assets/images/image-3.jpg" alt="طبيبة أسنان أثناء العمل">
-                    <div class="image-card-overlay"></div>
+                    <div class="image-card-overlay">
+                        <span class="marketing-label">رعاية حديثة لأجلك</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -972,7 +1013,7 @@
             });
         }
 
-        // ✨ Function to create random dental icons
+        // Function to create random dental icons
         function createRandomDentalIcons(count) {
             const heroSection = document.getElementById('hero');
             const defaultIconColor = '#19B6D1';
@@ -1005,7 +1046,7 @@
             return icons;
         }
 
-        // ✨ Function to track mouse movement and apply a glow effect
+        // Function to track mouse movement and apply a glow effect
         function setupMouseInteraction(icons) {
             const heroSection = document.getElementById('hero');
             const glowColor = '255, 255, 255';
@@ -1046,81 +1087,66 @@
             });
         }
 
+        // Gallery functionality for small screens
+        let mobileGalleryIntervalId = null;
+
+        function setupMobileGallery() {
+            const gallery = document.querySelector('.image-gallery');
+            const cards = document.querySelectorAll('.gallery-image-card');
+
+            const isMobile = window.matchMedia('(max-width: 768px)').matches;
+
+            if (isMobile) {
+                let currentIndex = 0;
+
+                cards.forEach((card) => {
+                    card.style.opacity = '0';
+                    card.style.zIndex = '1';
+                });
+
+                cards[currentIndex].style.opacity = '1';
+                cards[currentIndex].style.zIndex = '2';
+
+                const fadeInOut = () => {
+                    cards[currentIndex].style.opacity = '0';
+                    currentIndex = (currentIndex + 1) % cards.length;
+                    cards[currentIndex].style.opacity = '1';
+                };
+
+                if (mobileGalleryIntervalId) {
+                    clearInterval(mobileGalleryIntervalId);
+                }
+
+                mobileGalleryIntervalId = setInterval(fadeInOut, 3000);
+            } else {
+                if (mobileGalleryIntervalId) {
+                    clearInterval(mobileGalleryIntervalId);
+                    mobileGalleryIntervalId = null;
+                }
+                cards.forEach(card => {
+                    card.style.opacity = '1';
+                    card.style.zIndex = 'auto';
+                });
+            }
+        }
+
+        function handleGalleryOnResize() {
+            setupMobileGallery();
+        }
+
         // Initialize all functions when DOM is loaded
         document.addEventListener('DOMContentLoaded', () => {
             handleHeaderOnScroll();
             setupMobileMenu();
             setupSmoothScrolling();
             enhanceButtonEffects();
-
             const dentalIcons = createRandomDentalIcons(15);
             setupMouseInteraction(dentalIcons);
-        });
-        // New function to handle the gallery for smaller screens
-        function setupResponsiveGallery() {
-            const gallery = document.querySelector('.image-gallery');
-            const cards = document.querySelectorAll('.gallery-image-card');
-            let currentIndex = 0;
-            let intervalId = null;
 
-            // We check if the screen is mobile (max-width: 768px in your CSS)
-            const isMobile = window.matchMedia('(max-width: 768px)').matches;
-
-            // If it's a mobile screen, we hide all images except the first one and set up the fade effect.
-            if (isMobile) {
-                gallery.style.height = 'auto'; // عشان تتناسب مع الصورة الواحدة
-                cards.forEach((card, index) => {
-                    if (index !== 0) {
-                        card.style.display = 'none';
-                    }
-                });
-
-                const fadeInOut = () => {
-                    // First, hide the current image smoothly
-                    cards[currentIndex].style.opacity = '0';
-                    setTimeout(() => {
-                        cards[currentIndex].style.display = 'none';
-
-                        // Then, move to the next image
-                        currentIndex = (currentIndex + 1) % cards.length;
-
-                        // Show the next image smoothly
-                        cards[currentIndex].style.display = 'block';
-                        setTimeout(() => {
-                            cards[currentIndex].style.opacity = '1';
-                        }, 50); // A small delay to ensure the display change is registered
-                    }, 500); // Wait 0.5 seconds for the fade-out to finish
-                };
-
-                // Start the automatic slideshow
-                intervalId = setInterval(fadeInOut, 3000); // Change image every 3 seconds
-            } else {
-                // If it's a desktop screen, make sure all images are visible and clear the interval
-                if (intervalId) {
-                    clearInterval(intervalId);
-                    intervalId = null;
-                }
-                cards.forEach(card => {
-                    card.style.display = 'block';
-                    card.style.opacity = '1';
-                });
-            }
-        }
-
-        // Event listener عشان نضمن ان الكود بيشتغل لما الصفحة تحمل
-        document.addEventListener('DOMContentLoaded', () => {
-            // ... all your existing functions
-            handleHeaderOnScroll();
-            setupMobileMenu();
-            setupSmoothScrolling();
-            enhanceButtonEffects();
-
-            // Call the new function
-            setupResponsiveGallery();
+            handleGalleryOnResize();
         });
 
-        // We also call the function when the window is resized, so it works correctly if the user changes screen size
-        window.addEventListener('resize', setupResponsiveGallery);
+        window.addEventListener('resize', handleGalleryOnResize);
     </script>
 </body>
 

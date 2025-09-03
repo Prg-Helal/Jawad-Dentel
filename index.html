@@ -10,6 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
     <style>
         /* CSS Variables */
         :root {
@@ -63,12 +66,12 @@
             background-color: rgba(255, 255, 255, 0.98);
             transition: var(--transition);
             padding: 12px 0;
-            backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(31, 95, 191, 0.1);
         }
 
         header.scrolled {
             box-shadow: var(--shadow);
+            transform: translateY(-5px);
             padding: 8px 0;
         }
 
@@ -461,6 +464,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
 
         .image-overlay {
@@ -481,6 +485,7 @@
             z-index: 1;
             animation: float 6s ease-in-out infinite;
             transition: text-shadow 0.3s ease-out;
+            pointer-events: none;
         }
 
         /* New Creative Elements */
@@ -599,6 +604,407 @@
             }
         }
 
+        /* About Us Section */
+        /* About Us Section - تعديلات لدمج القسم وتأثير الفيد */
+        .about-section {
+            padding: 100px 0;
+            /* تغيير التدرج لجعل الخلفية تندمج مع ما قبلها وبعدها */
+            background: linear-gradient(to bottom, rgba(245, 247, 250, 0.5) 0%, rgba(255, 255, 255, 1) 100%),
+                linear-gradient(20deg, rgba(31, 95, 191, 0.05) 0%, rgba(25, 182, 209, 0.05) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-container {
+            display: flex;
+            gap: 3rem;
+            /* إزالة الخلفية البيضاء والظلال لجعل المحتوى مدمجًا */
+            background-color: transparent;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 0;
+            box-shadow: none;
+            flex-direction: row;
+            text-align: right;
+            padding: 0 1rem;
+            /* إضافة مسافة داخلية (padding) للحفاظ على المحتوى */
+        }
+
+        /* إزالة الأنماط الخاصة بالـ "Card" من الحاوية الكبيرة */
+        @media (max-width: 992px) {
+            .about-container {
+                border-radius: 12px;
+                /* يمكنك إبقاء هذه التعديلات للأجهزة اللوحية والموبايل */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .about-container {
+                border-radius: 12px;
+            }
+        }
+
+        .about-column {
+            flex: 1;
+        }
+
+        /* Left Column: Images and Cards */
+        .about-left-column {
+            position: relative;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 500px;
+        }
+
+        .about-images-container {
+            position: relative;
+            width: 100%;
+            height: 65%;
+            min-height: 480px;
+        }
+
+        /* Container for each image and its card */
+        .about-image-wrapper {
+            position: absolute;
+            width: 65%;
+            height: 70%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .about-image-wrapper.bottom {
+            width: 70%;
+            height: 60%;
+            top: 40%;
+            right: 0;
+            left: auto;
+            margin-top: 4rem;
+            z-index: 2;
+        }
+
+        .about-main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        /* Card improvements */
+        .about-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 1.25rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            z-index: 4;
+            width: 220px;
+            text-align: right;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Exact card positions */
+        .about-experience-card {
+            top: 20%;
+            left: 74%;
+        }
+
+        .about-tools-card {
+            top: 40%;
+            left: -95px;
+        }
+
+        .about-card .stars {
+            color: #ffc107;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+
+        .about-card p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Right Column: Text Content */
+        .about-right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .about-label {
+            background: linear-gradient(to right, var(--primary-blue), var(--primary-turquoise));
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 20px;
+            width: fit-content;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 15px rgba(31, 95, 191, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .about-label:hover {
+            box-shadow: 0 6px 20px rgba(31, 95, 191, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .about-section h2 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin: 1rem 0;
+            font-weight: 800;
+            color: #2a2a2a;
+            background: linear-gradient(to left, var(--primary-blue), var(--primary-turquoise));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-right-column>p {
+            font-size: 1.05rem;
+            color: #555;
+            max-width: 95%;
+        }
+
+        .about-features-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+        }
+
+        .about-feature-item {
+            display: flex;
+            align-items: center;
+            flex-basis: calc(50% - 1.25rem);
+            font-size: 1rem;
+            color: #555;
+            font-weight: 600;
+        }
+
+        /* Custom icon styles */
+        .about-feature-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(to right, var(--primary-blue), var(--primary-turquoise));
+            color: #fff;
+            font-size: 0.9rem;
+            margin-left: 0.75rem;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .about-feature-item:hover .about-feature-icon {
+            transform: scale(1.1);
+            background: linear-gradient(to left, var(--primary-blue), var(--primary-turquoise));
+        }
+
+        .about-action-row {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .about-primary-button {
+            background: linear-gradient(to right, var(--primary-blue), var(--primary-turquoise));
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(31, 95, 191, 0.3);
+        }
+
+        .about-primary-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(31, 95, 191, 0.4);
+        }
+
+        .about-profile-card {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: #f9f9f9;
+            padding: 0.6rem 1rem 0.6rem 0.6rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .about-profile-card:hover {
+            background: #f0f0f0;
+            transform: translateY(-2px);
+        }
+
+        .about-profile-image {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #fff;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-profile-card h4 {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        .about-profile-card p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        /* Media Queries for Tablet Responsiveness */
+        @media (max-width: 992px) {
+            .about-container {
+                flex-direction: column-reverse;
+            }
+
+            .about-column {
+                padding: 2rem;
+            }
+
+            .about-left-column {
+                min-height: 400px;
+                padding: 1rem 2rem 2rem;
+            }
+
+            .about-images-container {
+                height: 400px;
+            }
+
+            .about-section h2 {
+                font-size: 2.2rem;
+            }
+
+            .about-action-row {
+                flex-direction: row;
+                justify-content: flex-start;
+            }
+        }
+
+        /* Media Queries for Mobile Responsiveness */
+        @media (max-width: 600px) {
+            .about-section {
+                padding: 60px 0;
+            }
+
+            .about-container {
+                flex-direction: column-reverse;
+                border-radius: 12px;
+            }
+
+            .about-column {
+                padding: 1.5rem;
+            }
+
+            .about-left-column {
+                padding: 0 1rem 1.5rem;
+                min-height: auto;
+            }
+
+            .about-images-container {
+                position: static;
+                height: auto;
+                min-height: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .about-image-wrapper {
+                position: relative;
+                width: 100%;
+                height: 280px;
+                top: auto;
+                left: auto;
+                margin: 0;
+            }
+
+            .about-image-wrapper.bottom {
+                position: relative;
+                width: 100%;
+                height: 250px;
+                top: auto;
+                right: auto;
+                margin-top: 0;
+            }
+
+            .about-card {
+                position: absolute;
+                width: 85%;
+                max-width: 240px;
+                bottom: 15px;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 1rem;
+                text-align: center;
+            }
+
+            .about-experience-card {
+                top: auto;
+                left: 50%;
+                bottom: 15px;
+            }
+
+            .about-tools-card {
+                top: auto;
+                left: 50%;
+                bottom: 15px;
+            }
+
+            .about-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .about-features-list {
+                gap: 1rem;
+            }
+
+            .about-feature-item {
+                flex-basis: 100%;
+                font-size: 0.95rem;
+            }
+
+            .about-action-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.25rem;
+            }
+
+            .about-primary-button {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Cross-browser support improvements */
+        @supports not (backdrop-filter: blur(10px)) {
+            .about-card {
+                background-color: #fff;
+            }
+        }
+
         /* Animations */
         @keyframes fadeIn {
             from {
@@ -624,17 +1030,19 @@
             }
         }
 
+        /* Modified Floating animation */
         @keyframes float {
             0% {
-                transform: translateY(0) rotate(0deg);
+                transform: translateY(0);
             }
 
             50% {
-                transform: translateY(-15px) rotate(5deg);
+                transform: translateY(-8px);
+                /* Adjusted for less movement */
             }
 
             100% {
-                transform: translateY(0) rotate(0deg);
+                transform: translateY(0);
             }
         }
 
@@ -739,9 +1147,8 @@
                 height: 280px;
             }
 
-            .circle-1,
-            .circle-2,
-            .circle-3 {
+
+            .circle-2 {
                 display: none;
             }
 
@@ -773,7 +1180,7 @@
                 font-size: 24px;
             }
 
-            /* Responsive for Gallery Section */
+            /* Responsive for Gallery Section (Mobile Carousel) */
             .image-gallery {
                 display: block;
                 height: 40vh;
@@ -789,7 +1196,7 @@
                 transition: opacity 1s ease-in-out;
             }
 
-            .gallery-image-card:first-child {
+            .gallery-image-card.active-slide {
                 opacity: 1;
             }
 
@@ -851,7 +1258,7 @@
     <header id="header">
         <div class="container nav-container">
             <a href="#" class="logo">
-                <img src="assets/images/logo.png" alt="Jawad Dental Clinic Logo">
+                <img src="assets/images/logo (1).webp" alt="Jawad Dental Clinic Logo" loading="lazy">
             </a>
             <nav>
                 <ul class="nav-menu">
@@ -878,7 +1285,6 @@
 
     <section class="hero" id="hero">
         <div class="hero-bg"></div>
-
         <div class="circle-shape circle-1"></div>
         <div class="circle-shape circle-2"></div>
         <div class="circle-shape circle-3"></div>
@@ -887,7 +1293,7 @@
 
             <div class="hero-image">
                 <div class="image-container">
-                    <img src="assets/images/jawad-image.jpg" alt="طبيب أسنان محترف في عيادة جواد">
+                    <img src="assets/images/Jawad-image.webp" alt="طبيب أسنان محترف في عيادة جواد" loading="lazy">
                     <div class="image-overlay"></div>
                 </div>
             </div>
@@ -918,23 +1324,83 @@
 
     <section class="gallery-section" id="gallery">
         <div class="container" style="max-width: 100% !important;">
-            <div class="image-gallery">
-                <div class="gallery-image-card">
-                    <img src="assets/images/image-1.jpg" alt="طبيب أسنان يعالج طفل">
+            <div class="image-gallery" data-aos="fade-up">
+                <div class="gallery-image-card" data-aos="fade-up">
+                    <img src="assets/images/hero-image-1.jpg" alt="طبيب أسنان يعالج طفل">
                     <div class="image-card-overlay">
                         <span class="marketing-label">عيادة الأسنان الرائدة</span>
                     </div>
                 </div>
-                <div class="gallery-image-card">
-                    <img src="assets/images/image-2.jpg" alt="فتاة سعيدة في عيادة الأسنان">
+                <div class="gallery-image-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="assets/images/hero-image-2.jpg" alt="فتاة سعيدة في عيادة الأسنان">
                     <div class="image-card-overlay">
                         <span class="marketing-label">ابتسامة واثقة</span>
                     </div>
                 </div>
-                <div class="gallery-image-card">
-                    <img src="assets/images/image-3.jpg" alt="طبيبة أسنان أثناء العمل">
+                <div class="gallery-image-card" data-aos="fade-up" data-aos-delay="400">
+                    <img src="assets/images/hero-image-3.jpg" alt="طبيبة أسنان أثناء العمل">
                     <div class="image-card-overlay">
                         <span class="marketing-label">رعاية حديثة لأجلك</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about-section" id="about">
+        <div class="container about-container" data-aos="fade-up">
+            <div class="about-column about-left-column">
+                <div class="about-images-container">
+                    <div class="about-image-wrapper top">
+                        <img src="assets/images/Why to Choose and how to use Align Probiotics  - Align Probiotics.jpg" alt="طبيب أسنان يعالج مريض" class="about-main-image">
+                        <div class="about-card about-experience-card">
+                            <div class="stars">★★★★★</div>
+                            <p><b>أكثر من 20 عامًا</b> من الخبرة في خدمات طب الأسنان.</p>
+                        </div>
+                    </div>
+
+                    <div class="about-image-wrapper bottom">
+                        <img src="assets/images/gallery-image-2.jpg" alt="أيدي طبيب أسنان" class="about-main-image">
+                        <div class="about-card about-tools-card">
+                            <span class="icon">💉</span>
+                            <p><b>1,350+</b><br>إجمالي أدوات الأسنان</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-column about-right-column">
+                <span class="about-label">عنا</span>
+
+                <h2>
+                    العناية المتقدمة <br>
+                    وابتسامات جميلة
+                </h2>
+
+                <p>نحن ملتزمون بتقديم رعاية أسنان من الدرجة الأولى في بيئة مريحة ومرحبة. يستخدم فريقنا أحدث التقنيات
+                    لضمان تجربة خالية من التوتر.</p>
+
+                <div class="about-features-list">
+                    <div class="about-feature-item"><span class="about-feature-icon">&#10003;</span> رعاية دقيقة</div>
+                    <div class="about-feature-item"><span class="about-feature-icon">&#10003;</span> طبيب أسنان خبير
+                    </div>
+                    <div class="about-feature-item"><span class="about-feature-icon">&#10003;</span> دعم الجودة</div>
+                    <div class="about-feature-item"><span class="about-feature-icon">&#10003;</span> أدوات معقمة</div>
+                    <div class="about-feature-item"><span class="about-feature-icon">&#10003;</span> علاجات خالية من
+                        الألم</div>
+                    <div class="about-feature-item"><span class="about-feature-icon">&#10003;</span> خدمات شخصية</div>
+                </div>
+
+                <div class="about-action-row">
+                    <button class="about-primary-button">المزيد عنا</button>
+                    <div class="about-profile-card">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqi-4JrduMotgaxq8CHqJEu0aTF5fPNSmZww&s"
+                            alt="صورة الدكتور جاكسون نيل" class="about-profile-image">
+                        <div>
+                            <h4>د. جاكسون نيل</h4>
+                            <p>مؤسس Dentatz</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -947,207 +1413,145 @@
         </div>
     </a>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
     <script>
-        // Sticky header on scroll
-        function handleHeaderOnScroll() {
-            const header = document.getElementById('header');
-            window.addEventListener('scroll', () => {
-                if (window.scrollY > 50) {
-                    header.classList.add('scrolled');
+        $(document).ready(function () {
+            // Function to initialize AOS based on screen size
+            function initAOS() {
+                if (window.innerWidth > 768) {
+                    AOS.init({
+                        duration: 1000,
+                        once: true,
+                        offset: 100
+                    });
+                    $('.gallery-image-card').attr('data-aos', 'fade-up');
+                    $('.gallery-image-card:nth-child(2)').attr('data-aos-delay', '200');
+                    $('.gallery-image-card:nth-child(3)').attr('data-aos-delay', '400');
                 } else {
-                    header.classList.remove('scrolled');
+                    // Disable AOS on small screens
+                    $('[data-aos]').removeAttr('data-aos');
+                    $('[data-aos-delay]').removeAttr('data-aos-delay');
+                }
+            }
+
+            // Initial call to set AOS
+            initAOS();
+
+            // Re-initialize AOS on window resize
+            let resizeTimer;
+            $(window).on('resize', function () {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(initAOS, 250);
+            });
+
+            // Sticky header on scroll
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > 50) {
+                    $('#header').addClass('scrolled');
+                } else {
+                    $('#header').removeClass('scrolled');
                 }
             });
-        }
 
-        // Mobile menu toggle and hamburger animation
-        function setupMobileMenu() {
-            const hamburger = document.querySelector('.hamburger');
-            const navMenu = document.querySelector('.nav-menu');
-
-            hamburger.addEventListener('click', () => {
-                hamburger.classList.toggle('active');
-                navMenu.classList.toggle('active');
+            // Mobile menu toggle and hamburger animation
+            $('.hamburger').click(function () {
+                $(this).toggleClass('active');
+                $('.nav-menu').toggleClass('active');
             });
 
             // Close menu when clicking on a link
-            document.querySelectorAll('.nav-menu a').forEach(link => {
-                link.addEventListener('click', () => {
-                    hamburger.classList.remove('active');
-                    navMenu.classList.remove('active');
-                });
+            $('.nav-menu a').click(function () {
+                $('.hamburger').removeClass('active');
+                $('.nav-menu').removeClass('active');
             });
-        }
 
-        // Smooth scrolling for navigation links
-        function setupSmoothScrolling() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
+            // Smooth scrolling for navigation links
+            $('a[href^="#"]').on('click', function (event) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
 
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
+                event.preventDefault();
+                $('html, body').animate({
+                    scrollTop: $(targetId).offset().top - 80
+                }, 800);
+            });
 
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
+            // Mobile gallery fade effect
+            function mobileGalleryCarousel() {
+                if (window.innerWidth <= 768) {
+                    const slides = $('.gallery-image-card');
+                    let currentSlide = 0;
+
+                    // Stop the carousel if it's already running to prevent multiple instances
+                    if (slides.data('carousel-interval')) {
+                        clearInterval(slides.data('carousel-interval'));
                     }
-                });
-            });
-        }
 
-        // Enhanced CTA button hover effects
-        function enhanceButtonEffects() {
-            const buttons = document.querySelectorAll('.cta-button, .hero-btn, .secondary-btn');
-            buttons.forEach(button => {
-                button.addEventListener('mouseenter', function () {
-                    this.style.transform = 'translateY(-3px)';
-                });
+                    slides.removeClass('active-slide');
+                    slides.first().addClass('active-slide');
 
-                button.addEventListener('mouseleave', function () {
-                    this.style.transform = 'translateY(0)';
-                });
-            });
-        }
+                    const carouselInterval = setInterval(() => {
+                        currentSlide = (currentSlide + 1) % slides.length;
+                        slides.removeClass('active-slide');
+                        slides.eq(currentSlide).addClass('active-slide');
+                    }, 3000); // Change image every 3 seconds
 
-        // Function to create random dental icons
-        function createRandomDentalIcons(count) {
-            const heroSection = document.getElementById('hero');
-            const defaultIconColor = '#19B6D1';
-            const minSize = 16;
-            const maxSize = 30;
-            const maxDelay = 6;
-            const icons = [];
-
-            for (let i = 0; i < count; i++) {
-                const icon = document.createElement('i');
-                icon.className = 'dental-icon fas fa-tooth';
-                const size = Math.random() * (maxSize - minSize) + minSize;
-                const opacity = Math.random() * 0.4 + 0.1;
-                const top = Math.random() * 100;
-                const left = Math.random() * 100;
-                const delay = Math.random() * maxDelay;
-
-                icon.style.cssText = `
-                    position: absolute;
-                    top: ${top}%;
-                    left: ${left}%;
-                    font-size: ${size}px;
-                    opacity: ${opacity};
-                    color: ${defaultIconColor};
-                    animation-delay: ${delay}s;
-                `;
-                heroSection.appendChild(icon);
-                icons.push(icon);
-            }
-            return icons;
-        }
-
-        // Function to track mouse movement and apply a glow effect
-        function setupMouseInteraction(icons) {
-            const heroSection = document.getElementById('hero');
-            const glowColor = '255, 255, 255';
-
-            heroSection.addEventListener('mousemove', (e) => {
-                const rect = heroSection.getBoundingClientRect();
-                const mouseX = e.clientX - rect.left;
-                const mouseY = e.clientY - rect.top;
-
-                icons.forEach(icon => {
-                    const iconRect = icon.getBoundingClientRect();
-                    const iconX = iconRect.left - rect.left + iconRect.width / 2;
-                    const iconY = iconRect.top - rect.top + iconRect.height / 2;
-
-                    const deltaX = mouseX - iconX;
-                    const deltaY = mouseY - iconY;
-
-                    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-                    const maxDistance = 300;
-
-                    if (distance < maxDistance) {
-                        const proximity = 1 - (distance / maxDistance);
-                        const glowSize = 15 * proximity;
-                        const glowOpacity = 1 * proximity;
-
-                        icon.style.textShadow = `0 0 ${glowSize}px rgba(${glowColor}, ${glowOpacity})`;
-
-                    } else {
-                        icon.style.textShadow = 'none';
+                    // Store the interval ID to clear it later
+                    slides.data('carousel-interval', carouselInterval);
+                } else {
+                    // Clear interval if screen is resized to larger than 768px
+                    const slides = $('.gallery-image-card');
+                    if (slides.data('carousel-interval')) {
+                        clearInterval(slides.data('carousel-interval'));
+                        slides.data('carousel-interval', null);
                     }
-                });
-            });
-
-            heroSection.addEventListener('mouseleave', () => {
-                icons.forEach(icon => {
-                    icon.style.textShadow = 'none';
-                });
-            });
-        }
-
-        // Gallery functionality for small screens
-        let mobileGalleryIntervalId = null;
-
-        function setupMobileGallery() {
-            const gallery = document.querySelector('.image-gallery');
-            const cards = document.querySelectorAll('.gallery-image-card');
-
-            const isMobile = window.matchMedia('(max-width: 768px)').matches;
-
-            if (isMobile) {
-                let currentIndex = 0;
-
-                cards.forEach((card) => {
-                    card.style.opacity = '0';
-                    card.style.zIndex = '1';
-                });
-
-                cards[currentIndex].style.opacity = '1';
-                cards[currentIndex].style.zIndex = '2';
-
-                const fadeInOut = () => {
-                    cards[currentIndex].style.opacity = '0';
-                    currentIndex = (currentIndex + 1) % cards.length;
-                    cards[currentIndex].style.opacity = '1';
-                };
-
-                if (mobileGalleryIntervalId) {
-                    clearInterval(mobileGalleryIntervalId);
                 }
-
-                mobileGalleryIntervalId = setInterval(fadeInOut, 3000);
-            } else {
-                if (mobileGalleryIntervalId) {
-                    clearInterval(mobileGalleryIntervalId);
-                    mobileGalleryIntervalId = null;
-                }
-                cards.forEach(card => {
-                    card.style.opacity = '1';
-                    card.style.zIndex = 'auto';
-                });
             }
-        }
+            mobileGalleryCarousel();
 
-        function handleGalleryOnResize() {
-            setupMobileGallery();
-        }
+            // Re-check on resize
+            $(window).on('resize', function () {
+                mobileGalleryCarousel();
+                initAOS();
+            });
 
-        // Initialize all functions when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            handleHeaderOnScroll();
-            setupMobileMenu();
-            setupSmoothScrolling();
-            enhanceButtonEffects();
-            const dentalIcons = createRandomDentalIcons(15);
-            setupMouseInteraction(dentalIcons);
+            // Generate and position dental icons randomly
+            function generateDentalIcons(numIcons) {
+                const heroSection = $('.hero');
 
-            handleGalleryOnResize();
+                // Clear previous icons if any
+                heroSection.find('.dental-icon').remove();
+
+                for (let i = 0; i < numIcons; i++) {
+                    const icon = $('<i class="fas fa-tooth dental-icon"></i>');
+                    const top = Math.random() * 90; // Random top position
+                    const left = Math.random() * 90; // Random left position
+                    const size = Math.random() * (1.8 - 0.8) + 0.8; // Random size between 0.8rem and 1.8rem
+                    const delay = Math.random() * 5; // Random animation delay
+
+                    icon.css({
+                        'top': top + '%',
+                        'left': left + '%',
+                        'font-size': size + 'rem',
+                        'animation-delay': delay + 's'
+                    });
+
+                    heroSection.append(icon);
+                }
+            }
+            // Generate icons on page load for large screens only
+            if (window.innerWidth > 768) {
+                generateDentalIcons(15);
+            }
+            else {
+                generateDentalIcons(8);
+            }
+
         });
-
-        window.addEventListener('resize', handleGalleryOnResize);
     </script>
+
 </body>
 
 </html>
